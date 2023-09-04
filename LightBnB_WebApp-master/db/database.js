@@ -119,7 +119,7 @@ const getAllProperties = function (options, limit = 100) {
   // 3
   if (options.city) {
     queryParams.push(`%${options.city}%`);
-    queryString += `WHERE city LIKE $${queryParams.length} `;
+    queryString += `WHERE city iLIKE $${queryParams.length} `;
   }
 
   // Owner ID provided
