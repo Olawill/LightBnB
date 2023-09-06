@@ -49,10 +49,6 @@ const getUserWithId = function (id) {
  * @return {Promise<{}>} A promise to the user.
  */
 const addUser = function (user) {
-  // const userId = Object.keys(users).length + 1;
-  // user.id = userId;
-  // users[userId] = user;
-  // return Promise.resolve(user);
 
   return pool
     .query(
@@ -107,16 +103,17 @@ const getAllReservations = function (guest_id, limit = 10) {
  */
 const getAllProperties = function (options, limit = 100) {
 
-  // 1
+  // Array to hold all query parameters
   const queryParams = [];
-  // 2
+
+  // Base query string
   let queryString = `
   SELECT properties.*, avg(property_reviews.rating) as average_rating
   FROM properties
   JOIN property_reviews ON properties.id = property_id
   `;
 
-  // 3
+  // When city is included in the search parameter
   if (options.city) {
     queryParams.push(`%${options.city}%`);
     queryString += `WHERE city iLIKE $${queryParams.length} `;
@@ -184,10 +181,7 @@ const getAllProperties = function (options, limit = 100) {
   LIMIT $${queryParams.length};
   `;
 
-  // 5
-  // console.log(queryString, queryParams);
-
-  // 6
+  // Run and return the query
   return pool.query(queryString, queryParams).then((res) => res.rows);
 };
 
