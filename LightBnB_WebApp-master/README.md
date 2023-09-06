@@ -6,6 +6,7 @@
 .
 ├── db
 │   ├── json
+|   ├── index.js
 │   └── database.js
 ├── public
 │   ├── javascript
@@ -42,6 +43,7 @@
 
 * `db` contains all the database interaction code.
   * `json` is a directory that contains a bunch of dummy data in `.json` files.
+  * `index.js` is responsible for establishing the connection between node and postgres database.
   * `database.js` is responsible for all queries to the database. It doesn't currently connect to any database, all it does is return data from `.json` files.
 * `public` contains all of the HTML, CSS, and client side JavaScript. 
   * `index.html` is the entry point to the application. It's the only html page because this is a single page application.
